@@ -1,41 +1,15 @@
-/*!
 
-=========================================================
-* BLK Design System React - v1.2.2
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/blk-design-system-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/blk-design-system-react/blob/main/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
+import { useState, useEffect } from "react";
+import Particles from 'react-particles-js';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import AnimatedCursor from "react-animated-cursor"
+import WOW from 'wowjs';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
-// core components
-import IndexNavbar from "components/Navbars/IndexNavbar.js";
-import PageHeader from "components/PageHeader/PageHeader.js";
-import Footer from "components/Footer/Footer.js";
-
-import {
-  Button,
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  CardTitle,
-  ListGroupItem,
-  ListGroup,
-  Container,
-  Row,
-  Col,
-} from "reactstrap";
-
+// Import Swiper styles
+import 'swiper/css';
 export default function Index() {
   // React.useEffect(() => {
   //   document.body.classList.toggle("landing-page");
@@ -47,415 +21,1295 @@ export default function Index() {
 
   React.useEffect(() => {
     // document.body.classList.toggle("landing-page");
-        document.body.classList.toggle("index-page");
+    document.body.classList.toggle("index-page");
     // Specify how to clean up after this effect:
     return function cleanup() {
       // document.body.classList.toggle("landing-page");
       document.body.classList.toggle("index-page");
     };
   }, []);
+
+
+  const [scroll, setScroll] = useState(false);
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      setScroll(window.scrollY > 0);
+    });
+  }, []);
+
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      easing: 'ease-in-out',
+      once: true,
+      mirror: false
+    });
+  }, [])
+  useEffect(() => {
+    new WOW.WOW({
+      live: false
+    }).init();
+  }, [])
+
+
   return (
     <>
-      <IndexNavbar />
-      <div className="wrapper">
-        <PageHeader />
-      </div>
-      <div className="wrapper">
-        <section className="section section-lg">
-          <section className="section">
-            <img
-              alt="..."
-              className="path"
-              src={require("assets/img/path4.png")}
-            />
-            <Container>
-              <Row className="row-grid justify-content-between">
-                <Col className="mt-lg-5" md="5">
-                  <Row>
-                    <Col className="px-2 py-2" lg="6" sm="12">
-                      <Card className="card-stats">
-                        <CardBody>
-                          <Row>
-                            <Col md="4" xs="5">
-                              <div className="icon-big text-center icon-warning">
-                                <i className="tim-icons icon-trophy text-warning" />
-                              </div>
-                            </Col>
-                            <Col md="8" xs="7">
-                              <div className="numbers">
-                                <CardTitle tag="p">3,237</CardTitle>
-                                <p />
-                                <p className="card-category">Awards</p>
-                              </div>
-                            </Col>
-                          </Row>
-                        </CardBody>
-                      </Card>
-                    </Col>
-                    <Col className="px-2 py-2" lg="6" sm="12">
-                      <Card className="card-stats upper bg-default">
-                        <CardBody>
-                          <Row>
-                            <Col md="4" xs="5">
-                              <div className="icon-big text-center icon-warning">
-                                <i className="tim-icons icon-coins text-white" />
-                              </div>
-                            </Col>
-                            <Col md="8" xs="7">
-                              <div className="numbers">
-                                <CardTitle tag="p">3,653</CardTitle>
-                                <p />
-                                <p className="card-category">Commits</p>
-                              </div>
-                            </Col>
-                          </Row>
-                        </CardBody>
-                      </Card>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col className="px-2 py-2" lg="6" sm="12">
-                      <Card className="card-stats">
-                        <CardBody>
-                          <Row>
-                            <Col md="4" xs="5">
-                              <div className="icon-big text-center icon-warning">
-                                <i className="tim-icons icon-gift-2 text-info" />
-                              </div>
-                            </Col>
-                            <Col md="8" xs="7">
-                              <div className="numbers">
-                                <CardTitle tag="p">593</CardTitle>
-                                <p />
-                                <p className="card-category">Presents</p>
-                              </div>
-                            </Col>
-                          </Row>
-                        </CardBody>
-                      </Card>
-                    </Col>
-                    <Col className="px-2 py-2" lg="6" sm="12">
-                      <Card className="card-stats">
-                        <CardBody>
-                          <Row>
-                            <Col md="4" xs="5">
-                              <div className="icon-big text-center icon-warning">
-                                <i className="tim-icons icon-credit-card text-success" />
-                              </div>
-                            </Col>
-                            <Col md="8" xs="7">
-                              <div className="numbers">
-                                <CardTitle tag="p">10,783</CardTitle>
-                                <p />
-                                <p className="card-category">Forks</p>
-                              </div>
-                            </Col>
-                          </Row>
-                        </CardBody>
-                      </Card>
-                    </Col>
-                  </Row>
-                </Col>
-                <Col md="6">
-                  <div className="pl-md-5">
-                    <br/>
-                    <h1>
-                    Desarrollo de Software
-                    </h1>
-                    <p>
-                    Somos una startup líder en el desarrollo de software de IoT. Creamos soluciones a medida 
-                    que permiten a los dispositivos y sistemas estar interconectados, transformando la forma 
-                    en que interactúas con el mundo que te rodea.
-                    </p>
-                    <br />
+      <>
+        <AnimatedCursor
+          innerSize={12}
+          outerSize={12}
+          color='255, 255, 225'
+          outerAlpha={0.2}
+          innerScale={0.7}
+          outerScale={5}
+          clickables={[
+            'a',
+            'input[type="text"]',
+            'input[type="email"]',
+            'input[type="number"]',
+            'input[type="submit"]',
+            'input[type="image"]',
+            'label[for]',
+            'select',
+            'textarea',
+            'button',
+            '.link',
+            'ul'
+          ]}
+        />
+        {/*Start Page Header*/}
+        <header className={`page-header ${scroll ? "is-sticky" : ""} header-basic`} id="page-header">
+          <div className="header-search-box">
+            <div className="close-search" />
+            <form
+              className="nav-search search-form"
+              role="search"
+              method="get"
+              action="/"
+            >
+              <div className="search-wrapper">
+                <label className="search-lbl">Search for:</label>
+                <input
+                  className="search-input"
+                  type="search"
+                  placeholder="Search..."
+                  name="searchInput"
+                  autofocus="autofocus"
+                />
+                <button className="search-btn" type="submit">
+                  <i className="bi bi-search icon" />
+                </button>
+              </div>
+            </form>
+          </div>
+          <div className="container">
+            <nav className="menu-navbar">
+              <div className="header-logo">
+                <a className="logo-link" href="/">
+                  <img
+                    className="logo-img light-logo"
+                    loading="lazy"
+                    src={require("assets/img/logo_ligth_patineta.png")}
+                    alt="logo"
+                  />
+                  <img
+                    className="logo-img  dark-logo"
+                    loading="lazy"
+                    src={require("assets/img/logo_ligth_patineta.png")}
+                    alt="logo"
+                  />
+                </a>
+              </div>
+              <div className="links menu-wrapper ">
+                <ul className="list-js links-list">
+                  <li className="menu-item has-sub-menu">
                     <a
-                      className="font-weight-bold text-info mt-5"
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
+                      className="menu-link   active"
+                      href="/"
                     >
-                      Show all{" "}
-                      <i className="tim-icons icon-minimal-right text-info" />
+                      home 
+                    </a>
+                  
+                  </li>
+                  
+                  <li className="menu-item ">
+                    <a
+                      className="menu-link  "
+                      href="/"
+                    >
+                      servicios
+                    </a>
+                  
+                  </li>
+                  <li className="menu-item ">
+                    <a
+                      className="menu-link  "
+                      href="#0"
+                    >
+                      portfolio 
+                    </a>
+                 
+                  </li>
+
+                  <li className="menu-item">
+                    <a
+                      className="menu-link  "
+                      href="/"
+                    >
+                      Colaboraciones{" "}
+                    </a>
+                  </li>
+                 
+              
+                  <li className="menu-item">
+                    <a
+                      className="menu-link  "
+                      href="/"
+                    >
+                      Contacto{" "}
+                    </a>
+                  </li>
+                </ul>
+              </div>
+             
+            </nav>
+          </div>
+        </header>
+        {/*End Page Header*/}
+        {/* Start  Page hero*/}
+        <section
+          className="page-hero  d-flex align-items-center  tringle-bg"
+          id="page-hero"
+        >
+          <div
+            className="overlay-photo-image-bg"
+            data-bg-img="assets/images/sections-bg-images/pattern-bg-1.jpg"
+
+            data-bg-opacity=".2"
+            style={{
+              backgroundImage:
+                'url("assets/images/sections-bg-images/pattern-bg-1.jpg")',
+              opacity: "0.2"
+            }}
+          />
+
+          <div className="particles-js  dots" id="particles-js">
+            <Particles
+              params={{
+                "particles": {
+                  "number": {
+                    "value": 200,
+                    "density": {
+                      "enable": false
+                    }
+                  },
+                  "size": {
+                    "value": 3,
+                    "random": true,
+                    "anim": {
+                      "speed": 4,
+                      "size_min": 0.3
+                    }
+                  },
+                  "line_linked": {
+                    "enable": false
+                  },
+                  "move": {
+                    "random": true,
+                    "speed": 1,
+                    "direction": "top",
+                    "out_mode": "out"
+                  }
+                },
+                "interactivity": {
+                  "events": {
+                    "onhover": {
+                      "enable": true,
+                      "mode": "bubble"
+                    },
+                    "onclick": {
+                      "enable": true,
+                      "mode": "repulse"
+                    }
+                  },
+                  "modes": {
+                    "bubble": {
+                      "distance": 250,
+                      "duration": 2,
+                      "size": 1,
+                      "opacity": 0
+                    },
+                    "repulse": {
+                      "distance": 400,
+                      "duration": 4
+                    }
+                  }
+                }
+              }} />
+
+          </div>
+          <div className="container">
+            <div className="row align-items-center">
+              <div className="col-12 col-lg-6 ">
+                {/*Start of .hero-text-area*/}
+                <div className="hero-text-area   ">
+                  <div className="row">
+                    <div className="col-12   ">
+                      <div className="hero-social-icons mb-3 ">
+                        <div className="sc-wrapper dir-row sc-flat">
+                          <ul className="sc-list">
+                            <li className="sc-item " title="Facebook">
+                              <a
+                                className="sc-link"
+                                href="#0"
+                                title="social media icon"
+                              >
+                                <i className="fab fa-facebook-f sc-icon" />
+                              </a>
+                            </li>
+                            <li className="sc-item " title="youtube">
+                              <a
+                                className="sc-link"
+                                href="#0"
+                                title="social media icon"
+                              >
+                                <i className="fab fa-youtube sc-icon" />
+                              </a>
+                            </li>
+                            <li className="sc-item " title="instagram">
+                              <a
+                                className="sc-link"
+                                href="#0"
+                                title="social media icon"
+                              >
+                                <i className="fab fa-instagram sc-icon" />
+                              </a>
+                            </li>
+                            <li className="sc-item " title="twitter">
+                              <a
+                                className="sc-link"
+                                href="#0"
+                                title="social media icon"
+                              >
+                                <i className="fab fa-twitter sc-icon" />
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-12       ">
+                      <div className="pre-title ">Soluciones IOT </div>
+                      <h1 className="hero-title  ">
+                        Facilitamos los mejores servicios & Soluciones IOT
+
+                      </h1>
+                    </div>
+                    <div className="col-10       ">
+                      <p className="hero-subtitle ">
+                        Transformamos Ideas en realidades y soluciones digitales, con el lema de que si lo puedes pensar se puede crear.
+                      </p>
+                    </div>
+                    <div className="col-12   ">
+                      <div className="cta-links-area ">
+                        <a
+                          className=" btn-outline cta-link cta-link-primary "
+                          href="#0"
+                        >
+                          start now
+                        </a>
+                        <div className="play-btn-row-dir ">
+                          <a
+                            className="video-link"
+                            href="https://www.youtube.com/watch?v=QI4_dGvZ5yE&ab_channel=JUtah"
+                            role="button"
+                            title="play"
+                            data-fancybox="data-fancybox"
+                          >
+
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {/*End of .hero-text-area*/}
+              </div>
+              {/*start of .image-area */}
+              <div
+                className="col-12   mx-md-auto col-lg-6 text-center "
+                data-tilt=""
+                style={{
+                  willChange: "transform",
+                  transform:
+                    "perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)"
+                }}
+              >
+                <div className="hero-image-area mb-5 mb-lg-0">
+                  <div className="hero-img-wraper  ">
+                    <img
+                      className="img-fluid "
+                      src={require("assets/img/illustration-1.png")}
+
+                      alt=""
+                      draggable="false"
+                    />
+                  </div>
+                </div>
+              </div>
+              {/*End of .image-area */}
+            </div>
+          </div>
+        </section>
+        {/* End  Page hero*/}
+        {/* Start  services Section*/}
+        <section className="services services-boxed mega-section  " id="services">
+          <div className="container">
+            <div className="sec-heading  ">
+              <div className="content-area">
+                <span
+                  className="pre-title       wow fadeInUp"
+                  data-wow-delay=".2s"
+                  style={{
+                    visibility: "visible",
+                    animationDelay: "0.2s",
+                    animationName: "fadeInUp"
+                  }}
+                >
+                  servicios
+                </span>
+                <h2
+                  className="title    wow fadeInUp"
+                  data-wow-delay=".4s"
+                  style={{
+                    visibility: "visible",
+                    animationDelay: "0.4s",
+                    animationName: "fadeInUp"
+                  }}
+             
+                >
+                  <span className="hollow-text">Nuestros </span> Servicios:
+                </h2>
+                <p
+                  className="subtitle   wow fadeInUp"
+                  data-wow-delay=".6s"
+                  style={{
+                    visibility: "visible",
+                    animationDelay: "0.6s",
+                    animationName: "fadeInUp"
+                  }}
+                 
+                >
+                  te presentamos un abánico de servicios
+                  tecnológicos que te permitan encontrar en un mismo lugar la solucion a tu necesidad .
+                </p>
+              </div>
+              <div
+                className="cta-area   wow fadeInUp"
+               
+                data-wow-delay=".8s"
+                style={{
+                  visibility: "visible",
+                  animationDelay: "0.8s",
+                  animationName: "fadeInUp"
+                }}
+              >
+                
+              </div>
+            </div>
+            <div className="row gx-4 gy-4 services-row ">
+              <div className="col-12 col-md-6  col-lg-4 mx-auto ">
+                {/*Start First service box*/}
+                <div
+                  className="box service-box  wow fadeInUp reveal-start"
+                  data-wow-offset={0}
+                  data-wow-delay=".1s"
+                 
+                  style={{
+                    visibility: "visible",
+                    animationDelay: "0.1s",
+                    animationName: "fadeInUp"
+                  }}
+                >
+                  <div className="service-icon">
+                    <i className="flaticon-web-development font-icon" />
+                  </div>
+                  <span className="service-num hollow-text">1 </span>
+                  <div className="service-content">
+                    <h3 className="service-title">Desarrollo a Medida</h3>
+                    <p className="service-text">
+                      Garantizamos la creación de experiencias tecnológicas cautivadoras y funcionales en base a tus necesidades, que moldean la manera en que interactuamos con el mundo digital.
+                    </p>
+                  </div>
+
+                </div>
+                {/* End First service box   */}
+              </div>
+              <div className="col-12 col-md-6  col-lg-4 mx-auto ">
+                {/*Start Second service box*/}
+                <div
+                  className="box service-box wow fadeInUp reveal-start"
+                  data-wow-offset={0}
+                  data-wow-delay=".2s"
+                
+                  style={{
+                    visibility: "visible",
+                    animationDelay: "0.2s",
+                    animationName: "fadeInUp"
+                  }}
+                >
+                  <div className="service-icon">
+                    <i className="flaticon-nanotechnology font-icon" />
+                  </div>
+                  <span className="service-num hollow-text">2 </span>
+                  <div className="service-content">
+                    <h3 className="service-title">Integraciones</h3>
+                    <p className="service-text">
+                      Proporcionamos las mejores soluciones, que permitan mantener la sintonía armoniosa de diversas herramientas y
+                      sistemas que, al trabajar juntas, generan la mayor eficiencia, productividad y experiencia del usuario.
+                    </p>
+                  </div>
+
+                </div>
+                {/* End Second service box*/}
+              </div>
+              <div className="col-12 col-md-6  col-lg-4 mx-auto  ">
+                {/*Start Third service box*/}
+                <div
+                  className="box service-box  wow fadeInUp reveal-start"
+                  data-wow-offset={0}
+                  data-wow-delay=".3s"
+                  
+                  style={{
+                    visibility: "visible",
+                    animationDelay: "0.3s",
+                    animationName: "fadeInUp"
+                  }}
+                >
+                  <div className="service-icon">
+                    <i className="flaticon-web-domain font-icon" />
+                  </div>
+                  <span className="service-num hollow-text">3 </span>
+                  <div className="service-content">
+                    <h3 className="service-title">Infraestructura </h3>
+                    <p className="service-text">
+                      Te brindamos el apoyo necesario para que tus herramientas tecnológicas,
+                      tengan el mejor entorno de funcionamiento, Optimizando la gentión de Alojamiento, servidores y balanceo de carga entre otros.
+
+                    </p>
+                  </div>
+
+                </div>
+                {/* End Third service box*/}
+              </div>
+              <div className="col-12 col-md-6  col-lg-4 mx-auto  ">
+                {/*Start fourth service box*/}
+                <div
+                  className="box service-box  wow fadeInUp reveal-start"
+                  data-wow-offset={0}
+                  
+                  data-wow-delay=".4s"
+                  style={{
+                    visibility: "visible",
+                    animationDelay: "0.4s",
+                    animationName: "fadeInUp"
+                  }}
+                >
+                  <div className="service-icon">
+                    <i className="flaticon-profile font-icon" />
+                  </div>
+                  <span className="service-num hollow-text">4 </span>
+                  <div className="service-content">
+                    <h3 className="service-title">Dessarrollo de Aplicaciones</h3>
+                    <p className="service-text">
+                      Tranformamos ideas en realidad digital, de hacer que la tecnología se integre perfectamente en la vida cotidiana de las personas.  a través de soluciones personalizadas y creativas que llevan la innovación directamente a la palma de la mano de los usuarios.
+                    </p>
+                  </div>
+
+                </div>
+                {/* End fourth service box   */}
+              </div>
+              <div className="col-12 col-md-6  col-lg-4 mx-auto  ">
+                {/*Start 5th service box*/}
+                <div
+                  className="box service-box  wow fadeInUp reveal-start"
+                  data-wow-offset={0}
+                  data-wow-delay=".5s"
+                 
+                  style={{
+                    visibility: "visible",
+                    animationDelay: "0.5s",
+                    animationName: "fadeInUp"
+                  }}
+                >
+                  <div className="service-icon">
+                    <i className="flaticon-search font-icon" />
+                  </div>
+                  <span className="service-num hollow-text">5 </span>
+                  <div className="service-content">
+                    <h3 className="service-title">SEO</h3>
+                    <p className="service-text">
+                      Mejoramos tu posicionamiento y además en las clasificaciones en motores de búsqueda,
+                      buscando construir una presencia digital sólida y relevante que resuene con la audiencia objetivo, impulsando el crecimiento orgánico y la visibilidad en línea a lo largo del tiempo.
+                    </p>
+                  </div>
+
+                </div>
+                {/* End 5th service box*/}
+              </div>
+              <div className="col-12 col-md-6  col-lg-4 mx-auto  ">
+                {/*Start 6th service box*/}
+                <div
+                  className="box service-box  wow fadeInUp  reveal-start"
+               
+                  data-wow-offset={0}
+                  data-wow-delay=".6s"
+                  style={{
+                    visibility: "visible",
+                    animationDelay: "0.6s",
+                    animationName: "fadeInUp"
+                  }}
+                >
+                  <div className="service-icon">
+                    <i className="flaticon-strategy font-icon" />
+                  </div>
+                  <span className="service-num hollow-text">6 </span>
+                  <div className="service-content">
+                    <h3 className="service-title">Analisis de datos</h3>
+                    <p className="service-text">
+                      Te ayudamos en el correcto monitoreo del trafico que ingresa a tus sitios para que puedas conseguir finalmente con las estratégia definida en tu audiencia.
+                    </p>
+                  </div>
+
+                </div>
+                {/* End 6th service box*/}
+              </div>
+            </div>
+          </div>
+        </section>
+        {/* End  services Section*/}
+
+
+
+
+        {/* Start  portfolio-slider Section*/}
+        <section
+          className="portfolio portfolio-blocks mega-section   "
+          id="portfolio"
+        >
+          <div className="container">
+            <div className="sec-heading  ">
+              <div className="content-area">
+                <span
+                  className="pre-title       wow fadeInUp"
+                  data-wow-delay=".2s"
+                  style={{
+                    visibility: "visible",
+                    animationDelay: "0.2s",
+                    animationName: "fadeInUp"
+                  }}
+                >
+                  portfolio
+                </span>
+                <h2
+                  className="title    wow fadeInUp"
+               
+                  data-wow-delay=".4s"
+                  style={{
+                    visibility: "visible",
+                    animationDelay: "0.4s",
+                    animationName: "fadeInUp"
+                  }}
+                >
+                  Nuestro <span className="hollow-text">portafolio</span>
+                </h2>
+              </div>
+              <div
+                className="cta-area   wow fadeInUp"
+              
+                data-wow-delay=".8s"
+                style={{
+                  visibility: "visible",
+                  animationDelay: "0.8s",
+                  animationName: "fadeInUp"
+                }}
+              >
+               
+              </div>
+            </div>
+            <div className="portfolio-wrapper  ">
+              {/*a menu of links to show the photos users needs   */}
+              <ul
+                className="portfolio-btn-list wow fadeInUp"
+                data-wow-delay=".2s"
+                style={{
+                  visibility: "visible",
+                  animationDelay: "0.2s",
+                  animationName: "fadeInUp"
+                }}
+              >
+                <li className="portfolio-btn active " data-filter="*">
+                  Todo
+                </li>
+                <li className="portfolio-btn        " data-filter=".mobile">
+                  Aplicación Movil
+                </li>
+                <li className="portfolio-btn        " data-filter=".web">
+                  Web
+                </li>
+                <li className="portfolio-btn        " data-filter=".data">
+                Analytics
+                </li>
+                <li className="portfolio-btn        " data-filter=".hosting">
+                  Alojamiento
+                </li>
+              </ul>
+              <div
+                className="portfolio-group wow fadeIn"
+                data-wow-delay=".4s"
+                style={{
+                  height: 932,
+                  visibility: "visible",
+                  animationDelay: "0.4s",
+                  animationName: "fadeIn"
+                }}
+              >
+                <div className="row ">
+                  <div
+                    className="col-12  col-md-6  col-lg-4  portfolio-item mobile "
+                    style={{ position: "absolute", left: "0%", top: 0 }}
+                  >
+                    <div className="item   ">
+                      <a
+                        className="portfolio-img-link"
+                        href="portfolio-single.html"
+                      >
+                        <img
+                          className="portfolio-img   img-fluid "
+                          loading="lazy"
+                          src={require("assets/img/1.jpg")}
+                          alt="portfolio item photo"
+                        />
+                      </a>
+                      <div className="item-info ">
+                        <h3 className="item-title">Aplicación Movil</h3>
+                        <i className="bi bi-arrow-right icon " />
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="col-12  col-md-6  col-lg-4  portfolio-item web  "
+                    style={{ position: "absolute", left: "33.3325%", top: 0 }}
+                  >
+                    <div className="item   ">
+                      <a
+                        className="portfolio-img-link"
+                        href="portfolio-single.html"
+                      >
+                        <img
+                          className="portfolio-img   img-fluid "
+                          loading="lazy"
+                          src={require("assets/img/2.jpg")}
+                          alt="portfolio item photo"
+                        />
+                      </a>
+                      <div className="item-info ">
+                        <h3 className="item-title">Alojamiento</h3>
+                        <i className="bi bi-arrow-right icon " />
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="col-12  col-md-6  col-lg-4  portfolio-item data "
+                    style={{ position: "absolute", left: "66.6651%", top: 0 }}
+                  >
+                    <div className="item   ">
+                      <a
+                        className="portfolio-img-link"
+                        href="portfolio-single.html"
+                      >
+                        <img
+                          className="portfolio-img   img-fluid "
+                          loading="lazy"
+                          src={require("assets/img/3.jpg")}
+                          alt="portfolio item photo"
+                        />
+                      </a>
+                      <div className="item-info ">
+                        <h3 className="item-title">Analytics</h3>
+                        <i className="bi bi-arrow-right icon " />
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="col-12  col-md-6  col-lg-4  portfolio-item mobile "
+                    style={{ position: "absolute", left: "0%", top: 466 }}
+                  >
+                    <div className="item   ">
+                      <a
+                        className="portfolio-img-link"
+                        href="portfolio-single.html"
+                      >
+                        <img
+                          className="portfolio-img   img-fluid "
+                          loading="lazy"
+                          src={require("assets/img/4.jpg")}
+                          alt="portfolio item photo"
+                        />
+                      </a>
+                      <div className="item-info ">
+                        <h3 className="item-title">Alojamiento</h3>
+                        <i className="bi bi-arrow-right icon " />
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="col-12  col-md-6  col-lg-4  portfolio-item hosting "
+                    style={{ position: "absolute", left: "33.3325%", top: 466 }}
+                  >
+                    <div className="item   ">
+                      <a
+                        className="portfolio-img-link"
+                        href="portfolio-single.html"
+                      >
+                        <img
+                          className="portfolio-img   img-fluid "
+                          loading="lazy"
+                          src={require("assets/img/5.jpg")}
+                          alt="portfolio item photo"
+                        />
+                      </a>
+                      <div className="item-info ">
+                        <h3 className="item-title">SEO</h3>
+                        <i className="bi bi-arrow-right icon " />
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="col-12  col-md-6  col-lg-4  portfolio-item mobile"
+                    style={{ position: "absolute", left: "66.6651%", top: 466 }}
+                  >
+                    <div className="item   ">
+                      <a
+                        className="portfolio-img-link"
+                        href="portfolio-single.html"
+                      >
+                        <img
+                          className="portfolio-img   img-fluid "
+                          loading="lazy"
+                          src={require("assets/img/6.jpg")}
+                          alt="portfolio item photo"
+                        />
+                      </a>
+                      <div className="item-info ">
+                        <h3 className="item-title">other category</h3>
+                        <i className="bi bi-arrow-right icon " />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        {/* End  portfolio-slider Section*/}
+        {/* Start  our-clients Section*/}
+        <section
+          className="our-clients  mega-section   wow fadeInUp"
+          id="our-clients"
+          data-wow-delay="0.2s"
+          style={{
+            visibility: "visible",
+            animationDelay: "0.2s",
+            animationName: "fadeInUp"
+          }}
+        >
+          <div className="container">
+            <div className="sec-heading   centered ">
+              <div className="content-area">
+                <h2
+                  className="title    wow fadeInUp"
+                  data-wow-delay=".4s"
+                  style={{
+                    visibility: "visible",
+                    animationDelay: "0.4s",
+                    animationName: "fadeInUp"
+                  }}
+                >
+                  Colaboraciones e Integraciones
+                </h2>
+              </div>
+            </div>
+            <div className=" clients-logos d-flex align-items-center justify-content-around flex-wrap">
+              {/*Swiper*/}
+              <Swiper
+                spaceBetween={50}
+                slidesPerView={5}
+                onSlideChange={() => console.log('slide change')}
+                onSwiper={(swiper) => console.log(swiper)}
+                style={{ cursor: "grab" }}
+              >
+                
+                <SwiperSlide>
+                <div className="client-logo  ">
+                      <a href="#0">
+                        <img
+                          className="img-fluid logo "
+                          loading="lazy"
+                          src={require("assets/img/logo_tock_lock.png")}
+                          alt=" "
+                        />
+                      </a>
+                    </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                <div className="client-logo  ">
+                      <a href="#0">
+                        <img
+                          className="img-fluid logo "
+                          loading="lazy"
+                          src={require("assets/img/tuya_asmart.png")}
+                          alt=" "
+                        />
+                      </a>
+                    </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                <div className="client-logo  ">
+                      <a href="#0">
+                        <img
+                          className="img-fluid logo "
+                          loading="lazy"
+                          src={require("assets/img/logo_anfikey_.png")}
+                          alt=" "
+                        />
+                      </a>
+                    </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                <div className="client-logo  ">
+                      <a href="#0">
+                        <img
+                          className="img-fluid logo "
+                          loading="lazy"
+                          src={require("assets/img/logo_anfikey_.png")}
+                          alt=" "
+                        />
+                      </a>
+                    </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                <div className="client-logo  ">
+                      <a href="#0">
+                        <img
+                          className="img-fluid logo "
+                          loading="lazy"
+                          src={require("assets/img/logo_anfikey_.png")}
+                          alt=" "
+                        />
+                      </a>
+                    </div>
+                </SwiperSlide>
+                
+                
+              </Swiper>
+
+            </div>
+          </div>
+        </section>
+        {/* End  our-clients Section*/}
+
+
+        {/* Start  blog Section*/}
+        <section className="contact-us-form-section  mega-section  " data-aos="fade-up">
+
+          <div className="row">
+            <div className="container">
+              <div className="col-12 ">
+                <div className="contact-form-panel">
+                  <div className="sec-heading centered    ">
+                    <div className="content-area">
+                      <h2
+                        className="title    wow fadeInUp"
+                        data-wow-delay=".4s"
+                        style={{
+                          visibility: "visible",
+                          animationDelay: "0.4s",
+                          animationName: "fadeInUp"
+                        }}
+                      >
+                        Contacto
+                      </h2>
+                    </div>
+                  </div>
+                  <div
+                    className="contact-form-inputs "
+                    data-aos="fade-up"
+                    data-wow-delay=".6s"
+                    style={{
+                      visibility: "visible",
+                      animationDelay: "0.6s",
+                      animationName: "fadeInUp"
+                    }}
+                  >
+                    <div className="custom-form-area input-boxed">
+                      {/*Form To have user messages*/}
+                      <form
+                        className="main-form"
+                        id="contact-us-form"
+                        action="/"
+                        method="post"
+                      >
+                        <span className="done-msg" />
+                        <div className="row ">
+                          <div className="col-12 col-lg-6">
+                            <div className="input-wrapper">
+                              <input
+                                className="text-input"
+                                id="user-name"
+                                name="UserName"
+                                type="text"
+                              />
+                              <label className="input-label" htmlFor="user-name">
+                                {" "}
+                                Nombre <span className="req">*</span>
+                              </label>
+                              <span className="b-border" />
+                              <span className="error-msg" />
+                            </div>
+                          </div>
+                          <div className="col-12 col-lg-6">
+                            <div className="input-wrapper">
+                              <input
+                                className="text-input"
+                                id="user-email"
+                                name="UserEmail"
+                                type="email"
+                              />
+                              <label className="input-label" htmlFor="user-email">
+                                {" "}
+                                Correo  <span className="req">*</span>
+                              </label>
+                              <span className="b-border" />
+                              <span className="error-msg" />
+                            </div>
+                          </div>
+
+                          <div className="col-12 ">
+                            <div className="input-wrapper">
+                              <textarea
+                                className=" text-input"
+                                id="msg-text"
+                                name="message"
+                                defaultValue={""}
+                              />
+                              <label className="input-label" htmlFor="msg-text">
+                                {" "}
+                                Consulta<span className="req">*</span>
+                              </label>
+                              <span className="b-border" />
+                              <i />
+                              <span className="error-msg" />
+                            </div>
+                          </div>
+                          <div className="col-12 submit-wrapper">
+                            <button
+                              className=" btn-solid"
+                              id="submit-btn"
+                              type="submit"
+                              name="UserSubmit"
+                            >
+                              Enviar mensaje
+                            </button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+
+        {/* End  blog Section*/}
+
+
+        {/* Start  page-footer Section*/}
+        <footer className="page-footer dark-color-footer" id="page-footer">
+          <div
+            className="overlay-photo-image-bg"
+            data-bg-img="assets/images/sections-bg-images/footer-bg-1.jpg"
+            data-bg-opacity=".25"
+            style={{
+              backgroundImage:
+                'url("assets/images/sections-bg-images/footer-bg-1.jpg")',
+              opacity: "0.25"
+            }}
+          />
+          <div className="container">
+            <div className="row footer-cols">
+              <div className="col-12 col-md-8 col-lg-4  footer-col ">
+                <img
+                  className="img-fluid footer-logo"
+                  loading="lazy"
+                  src={require("assets/img/logo-colored.png")}
+
+                  alt="logo"
+                />
+                <div className="footer-col-content-wrapper">
+                  <p className="footer-text-about-us ">
+                    te invitamos a suscribirte para que tengas información actualizada sobre nuestros productos y servicios.
+                  </p>
+                </div>
+                <div className="form-area ">
+                  <div className="mailchimp-form ">
+                    <form
+                      className="one-field-form"
+                      method="post"
+                      action="#0"
+                    >
+                      <div className="field-group ">
+                        <label className="email-label" htmlFor="email-input">
+                          {" "}
+                         
+                        </label>
+                        <input
+                          className="email-input "
+                          type="email"
+                          defaultValue=""
+                          name="EMAIL"
+                          id="email-input"
+                          placeholder="correo electrónico"
+                          autoComplete="off"
+                        />
+                        <div className="cta-area">
+                          <input
+                            className="btn-solid subscribe-btn"
+                            type="submit"
+                            defaultValue="Subscribe"
+                            name="subscribe"
+                          />
+                        </div>
+                      </div>
+                      <span className="email-notice">
+                        *no comartiremos tu información personal
+                      </span>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <div className="col-6 col-lg-2  footer-col ">
+               
+              </div>
+              <div className="col-6 col-lg-2 footer-col ">
+                
+              </div>
+              <div className="col-12     col-lg-4 footer-col ">
+                <h2 className=" footer-col-title    ">Información de Contacto</h2>
+                <div className="footer-col-content-wrapper">
+                  <div className="contact-info-card">
+                    <i className="bi bi-envelope icon" />
+                    <a
+                      className="text-lowercase  info"
+                      href="mailto:example@support.com"
+                    >
+                      example@support.com
                     </a>
                   </div>
-                </Col>
-              </Row>
-            </Container>
-          </section>
-        </section>
-        <section className="section section-lg">
-          
-          <Container>
-            <Row className="justify-content-center">
-              <Col lg="12">
-                <h1 className="text-center">¿Qué ofrecemos?</h1>
-                <Row className="row-grid justify-content-center">
-                  <Col lg="3">
-                    <div className="info">
-                      <div className="icon icon-primary">
-                        <i className="tim-icons icon-money-coins" />
-                      </div>
-                      <h4 className="info-title">Aplicaciones IoT</h4>
-                      <hr className="line-primary" />
-                      <p>
-                      Construimos aplicaciones de IoT que se ajustan a las necesidades de tu negocio
-                      </p>
-                    </div>
-                  </Col>
-                  <Col lg="3">
-                    <div className="info">
-                      <div className="icon icon-warning">
-                        <i className="tim-icons icon-chart-pie-36" />
-                      </div>
-                      <h4 className="info-title">Implementación IoT</h4>
-                      <hr className="line-warning" />
-                      <p>
-                      Te ayudamos a implementar el Internet de las cosas en tu negocio, 
-                      optimizando procesos y generando nuevas oportunidades.
-                      </p>
-                    </div>
-                  </Col>
-                  <Col lg="3">
-                    <div className="info">
-                      <div className="icon icon-success">
-                        <i className="tim-icons icon-single-02" />
-                      </div>
-                      <h4 className="info-title">Consultoría de IoT</h4>
-                      <hr className="line-success" />
-                      <p>
-                      Nuestro equipo de expertos te acompañará a través de todo el proceso de adopción de IoT.
-                      </p>
-                    </div>
-                  </Col>
-                </Row>
-              </Col>
-            </Row>
-          </Container>
-        </section>
-        <section className="section section-lg section-safe">
-          <img
-            alt="..."
-            className="path"
-            src={require("assets/img/path5.png")}
-          />
-          <Container>
-            <Row className="row-grid justify-content-between">
-              <Col md="5">
-                <img
-                  alt="..."
-                  className="img-fluid floating"
-                  src={require("assets/img/chester-wade.jpg")}
-                />
-                <Card className="card-stats bg-danger">
-                  <CardBody>
-                    <div className="justify-content-center">
-                      <div className="numbers">
-                        <CardTitle tag="p">100%</CardTitle>
-                        <p className="card-category text-white">Safe</p>
+                  <div className="contact-info-card">
+                    <i className="bi bi-geo-alt icon" />
+                    <span className="text-lowercase  info">
+                      5 Xyz st., Abc, alexandria, egypt.
+                    </span>
+                  </div>
+                  <div className="contact-info-card">
+                    <i className="bi bi-phone icon" />
+                    <a className="info" href="tel:+20123456789">
+                      +20123456789
+                    </a>
+                  </div>
+                  <div className="contact-info-card">
+                    <div className="social-icons">
+                      <div className="sc-wrapper dir-row sc-size-32">
+                        <ul className="sc-list">
+                          <li className="sc-item " title="Facebook">
+                            <a
+                              className="sc-link"
+                              href="#0"
+                              title="social media icon"
+                            >
+                              <i className="fab fa-facebook-f sc-icon" />
+                            </a>
+                          </li>
+                          <li className="sc-item " title="youtube">
+                            <a
+                              className="sc-link"
+                              href="#0"
+                              title="social media icon"
+                            >
+                              <i className="fab fa-youtube sc-icon" />
+                            </a>
+                          </li>
+                          <li className="sc-item " title="instagram">
+                            <a
+                              className="sc-link"
+                              href="#0"
+                              title="social media icon"
+                            >
+                              <i className="fab fa-instagram sc-icon" />
+                            </a>
+                          </li>
+                          <li className="sc-item " title="twitter">
+                            <a
+                              className="sc-link"
+                              href="#0"
+                              title="social media icon"
+                            >
+                              <i className="fab fa-twitter sc-icon" />
+                            </a>
+                          </li>
+                        </ul>
                       </div>
                     </div>
-                  </CardBody>
-                </Card>
-                <Card className="card-stats bg-info">
-                  <CardBody>
-                    <div className="justify-content-center">
-                      <div className="numbers">
-                        <CardTitle tag="p">573 K</CardTitle>
-                        <p className="card-category text-white">
-                          Satisfied customers
-                        </p>
-                      </div>
-                    </div>
-                  </CardBody>
-                </Card>
-                <Card className="card-stats bg-default">
-                  <CardBody>
-                    <div className="justify-content-center">
-                      <div className="numbers">
-                        <CardTitle tag="p">10 425</CardTitle>
-                        <p className="card-category text-white">Business</p>
-                      </div>
-                    </div>
-                  </CardBody>
-                </Card>
-              </Col>
-              <Col md="6">
-                <div className="px-md-5">
-                  <hr className="line-success" />
-                  <h3>Soluciones Inteligentes.</h3>
-                  <p>
-                  Nuestras soluciones de IoT pueden ayudarte a mejorar la eficiencia, 
-                  incrementar la productividad, impulsar la innovación y crear experiencias      
-                  increíbles para tus clientes.
-                  </p>
-                  <ul className="list-unstyled mt-5">
-                    <li className="py-2">
-                      <div className="d-flex align-items-center">
-                        <div className="icon icon-success mb-2">
-                          <i className="tim-icons icon-vector" />
-                        </div>
-                        <div className="ml-3">
-                          <h6>Sistemas de seguridad inteligentes.</h6>
-                        </div>
-                      </div>
-                    </li>
-                    <li className="py-2">
-                      <div className="d-flex align-items-center">
-                        <div className="icon icon-success mb-2">
-                          <i className="tim-icons icon-tap-02" />
-                        </div>
-                        <div className="ml-3">
-                          <h6>Iluminación inteligente</h6>
-                        </div>
-                      </div>
-                    </li>
-                    <li className="py-2">
-                      <div className="d-flex align-items-center">
-                        <div className="icon icon-success mb-2">
-                          <i className="tim-icons icon-single-02" />
-                        </div>
-                        <div className="ml-3">
-                          <h6>Asistentes de voz</h6>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
+                  </div>
                 </div>
-              </Col>
-            </Row>
-          </Container>
-        </section>
-        <section className="section section-lg section-coins">
-          <img
-            alt="..."
-            className="path"
-            src={require("assets/img/path3.png")}
-          />
-          <Container>
-            <Row>
-              <Col md="4">
-                <hr className="line-info" />
-                <h1>
-                  Choose the coin{" "}
-                  <span className="text-info">that fits your needs</span>
-                </h1>
-              </Col>
-            </Row>
-            <Row>
-              <Col md="4">
-                <Card className="card-coin card-plain">
-                  <CardHeader>
-                    <img
-                      alt="..."
-                      className="img-center img-fluid"
-                      src={require("assets/img/tuya.png")}
-                    />
-                  </CardHeader>
-                  <CardBody>
-                    <Row>
-                      <Col className="text-center" md="12">
-                        <h4 className="text-uppercase">Light Coin</h4>
-                        <span>Plan</span>
-                        <hr className="line-primary" />
-                      </Col>
-                    </Row>
-                    <Row>
-                      <ListGroup>
-                        <ListGroupItem>50 messages</ListGroupItem>
-                        <ListGroupItem>100 emails</ListGroupItem>
-                        <ListGroupItem>24/7 Support</ListGroupItem>
-                      </ListGroup>
-                    </Row>
-                  </CardBody>
-                  <CardFooter className="text-center">
-                    <Button className="btn-simple" color="primary">
-                      Get plan
-                    </Button>
-                  </CardFooter>
-                </Card>
-              </Col>
-              <Col md="4">
-                <Card className="card-coin card-plain">
-                  <CardHeader>
-                    <img
-                      alt="..."
-                      className="img-center img-fluid"
-                      src={require("assets/img/tuya.png")}
-                    />
-                  </CardHeader>
-                  <CardBody>
-                    <Row>
-                      <Col className="text-center" md="12">
-                        <h4 className="text-uppercase">Dark Coin</h4>
-                        <span>Plan</span>
-                        <hr className="line-success" />
-                      </Col>
-                    </Row>
-                    <Row>
-                      <ListGroup>
-                        <ListGroupItem>150 messages</ListGroupItem>
-                        <ListGroupItem>1000 emails</ListGroupItem>
-                        <ListGroupItem>24/7 Support</ListGroupItem>
-                      </ListGroup>
-                    </Row>
-                  </CardBody>
-                  <CardFooter className="text-center">
-                    <Button className="btn-simple" color="success">
-                      Get plan
-                    </Button>
-                  </CardFooter>
-                </Card>
-              </Col>
-              <Col md="4">
-                <Card className="card-coin card-plain">
-                  <CardHeader>
-                    <img
-                      alt="..."
-                      className="img-center img-fluid"
-                      src={require("assets/img/ttlock.png")}
-                    />
-                  </CardHeader>
-                  <CardBody>
-                    <Row>
-                      <Col className="text-center" md="12">
-                        <h4 className="text-uppercase">Bright Coin</h4>
-                        <span>Plan</span>
-                        <hr className="line-info" />
-                      </Col>
-                    </Row>
-                    <Row>
-                      <ListGroup>
-                        <ListGroupItem>350 messages</ListGroupItem>
-                        <ListGroupItem>10K emails</ListGroupItem>
-                        <ListGroupItem>24/7 Support</ListGroupItem>
-                      </ListGroup>
-                    </Row>
-                  </CardBody>
-                  <CardFooter className="text-center">
-                    <Button className="btn-simple" color="info">
-                      Get plan
-                    </Button>
-                  </CardFooter>
-                </Card>
-              </Col>
-            </Row>
-          </Container>
-        </section>
-        {/* <div className="main">
+              </div>
+            </div>
+          </div>
+          <div className="copyrights ">
+            <div className="container">
+              <div className="row">
+                <div className="col-12 col-md-6 d-flex justify-content-start">
+                 
+                </div>
+                <div className="col-12 col-md-6 d-flex justify-content-end">
+                  <div className="terms-links">
+                    <a href="#0">Terminos y Condiciones </a>|{" "}
+                    <a
+                      href="#0"
+                      data-bs-toggle="modal"
+                      data-bs-target="#privacyPolicyModal"
+                    >
+                      Politica de privacidad.
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </footer>
+        {/* End  page-footer Section*/}
+        {/* Start loading-screen Component*/}
+        {/* End loading-screen Component*/}
+        {/* Start back-to-top Button*/}
+        <div className={`back-to-top ${scroll ? "show" : ""}`} id="back-to-top">
+          <i className="bi bi-arrow-up icon " />
+        </div>
+        {/* End back-to-top Button*/}
+        {/* Start privacy-policy-modal*/}
+        <div
+          className="modal privacy-policy-modal fade"
+          id="privacyPolicyModal"
+          aria-labelledby="PrivacyPolicyModalLabel"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog modal-dialog-scrollable modal-xl ">
+            <div className="modal-content text-dark">
+              <div className="modal-header">
+                <h2 className="modal-title" id="PrivacyPolicyModalLabel">
+                  Privacy Policy Modal Title
+                </h2>
+                <button
+                  className="btn-close"
+                  type="button"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                />
+              </div>
+              <div className="modal-body">
+                <div className="content">
+                  <h4>privacy policy item Title goes here </h4>
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Asperiores saepe, labore sequi libero nesciunt optio quidem iste,
+                    dolorum nostrum ex at. Recusandae ducimus aut autem temporibus
+                    tempore rerum, consequuntur doloribus perspiciatis, labore totam
+                    dolorem veritatis repellendus omnis illo sint ut?
+                  </p>
+                </div>
+                <div className="content">
+                  <h4>privacy policy item Title goes here </h4>
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Asperiores saepe, labore sequi libero nesciunt optio quidem iste,
+                    dolorum nostrum ex at. Recusandae ducimus aut autem temporibus
+                    tempore rerum, consequuntur doloribus perspiciatis, labore totam
+                    dolorem veritatis repellendus omnis illo sint ut?
+                  </p>
+                </div>
+                <div className="content">
+                  <h4>privacy policy item Title goes here </h4>
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Asperiores saepe, labore sequi libero nesciunt optio quidem iste,
+                    dolorum nostrum ex at. Recusandae ducimus aut autem temporibus
+                    tempore rerum, consequuntur doloribus perspiciatis, labore totam
+                    dolorem veritatis repellendus omnis illo sint ut?
+                  </p>
+                </div>
+                <div className="content">
+                  <h4>privacy policy item Title goes here </h4>
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Asperiores saepe, labore sequi libero nesciunt optio quidem iste,
+                    dolorum nostrum ex at. Recusandae ducimus aut autem temporibus
+                    tempore rerum, consequuntur doloribus perspiciatis, labore totam
+                    dolorem veritatis repellendus omnis illo sint ut?
+                  </p>
+                </div>
+                <div className="content">
+                  <h4>privacy policy item Title goes here </h4>
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Asperiores saepe, labore sequi libero nesciunt optio quidem iste,
+                    dolorum nostrum ex at. Recusandae ducimus aut autem temporibus
+                    tempore rerum, consequuntur doloribus perspiciatis, labore totam
+                    dolorem veritatis repellendus omnis illo sint ut?
+                  </p>
+                </div>
+                <div className="content">
+                  <h4>privacy policy item Title goes here </h4>
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Asperiores saepe, labore sequi libero nesciunt optio quidem iste,
+                    dolorum nostrum ex at. Recusandae ducimus aut autem temporibus
+                    tempore rerum, consequuntur doloribus perspiciatis, labore totam
+                    dolorem veritatis repellendus omnis illo sint ut?
+                  </p>
+                </div>
+              </div>
+              <div className="modal-footer">
+                <button
+                  className="btn-solid"
+                  type="button"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                >
+                  Click to close
+                </button>
+                <button className="btn-outline" type="button">
+                  Do somthing else
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </>
 
-          <Basics />
-          <Navbars />
-          <Tabs />
-          <Pagination />
-          <Notifications />
-          <Typography />
-          <JavaScript />
-          <NucleoIcons />
-          <Signup />
-          <Examples />
-          <Download />
-        </div> */}
-        <Footer />
-      </div>
+
     </>
   );
 }
