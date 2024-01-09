@@ -5119,3 +5119,15 @@ body.dark-theme .about .stats-counter.stats-cards .stat-box {
 }
 
 /*    End dark theme rules  *//*# sourceMappingURL=main-LTR.css.map */
+
+ .name-icon {
+  font-weight: 700;
+  font-size: 30px;
+}
+.name-icon span{
+  color:var(--clr-main);
+}
+
+.page-header.is-sticky .name-icon span{
+color: var(--clr-secondary);
+}

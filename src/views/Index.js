@@ -1,6 +1,6 @@
 
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Particles from 'react-particles-js';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -31,6 +31,48 @@ export default function Index() {
 
 
   const [scroll, setScroll] = useState(false);
+
+  const [width, setWidth] = useState(window.innerWidth);
+  const [height, setHeight] = useState(window.innerHeight);
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const handleResize = () => {
+    setWidth(window.innerWidth);
+    setHeight(window.innerHeight);
+    if(window.innerWidth<=991){
+      setSswiperValue(3)
+    }else{
+      setSswiperValue(5)
+    }
+  };
+
+  const [swiperValue,setSswiperValue]=useState(5);
+  const homeSeccion = useRef(null);
+  const servicesSeccion = useRef(null);
+  const portafolioSeccion = useRef(null);
+  const colaboracionSeccion = useRef(null);
+  const contactoSeccion = useRef(null);
+  const goToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+
+  const scrollDown = (ref) => {
+    window.scrollTo({
+      top: ref.current.offsetTop,
+      behavior: 'smooth',
+    });
+  };
+
   useEffect(() => {
     window.addEventListener("scroll", () => {
       setScroll(window.scrollY > 0);
@@ -105,7 +147,10 @@ export default function Index() {
           <div className="container">
             <nav className="menu-navbar">
               <div className="header-logo">
-                <a className="logo-link" href="/">
+                <h1 className="name-icon">
+                 Patineta<span>Studio</span>
+                </h1>
+                {/*<a className="logo-link" href="/">
                   <img
                     className="logo-img light-logo"
                     loading="lazy"
@@ -118,60 +163,60 @@ export default function Index() {
                     src={require("assets/img/logo_ligth_patineta.png")}
                     alt="logo"
                   />
-                </a>
+        </a>*/}
               </div>
               <div className="links menu-wrapper ">
                 <ul className="list-js links-list">
                   <li className="menu-item has-sub-menu">
-                    <a
+                    <span
                       className="menu-link   active"
-                      href="/"
+                      onClick={() => scrollDown(homeSeccion)}
                     >
-                      home 
-                    </a>
-                  
+                      home
+                    </span>
+
                   </li>
-                  
+
                   <li className="menu-item ">
-                    <a
+                    <span
                       className="menu-link  "
-                      href="/"
+                      onClick={() => scrollDown(servicesSeccion)}
                     >
                       servicios
-                    </a>
-                  
+                    </span>
+
                   </li>
                   <li className="menu-item ">
-                    <a
+                    <span
                       className="menu-link  "
-                      href="#0"
+                      onClick={() => scrollDown(portafolioSeccion)}
                     >
-                      portfolio 
-                    </a>
-                 
+                      portfolio
+                    </span>
+
                   </li>
 
                   <li className="menu-item">
-                    <a
+                    <span
                       className="menu-link  "
-                      href="/"
+                      onClick={() => scrollDown(colaboracionSeccion)}
                     >
                       Colaboraciones{" "}
-                    </a>
+                    </span>
                   </li>
-                 
-              
+
+
                   <li className="menu-item">
-                    <a
+                    <span
                       className="menu-link  "
-                      href="/"
+                      onClick={() => scrollDown(contactoSeccion)}
                     >
                       Contacto{" "}
-                    </a>
+                    </span>
                   </li>
                 </ul>
               </div>
-             
+
             </nav>
           </div>
         </header>
@@ -252,7 +297,7 @@ export default function Index() {
             <div className="row align-items-center">
               <div className="col-12 col-lg-6 ">
                 {/*Start of .hero-text-area*/}
-                <div className="hero-text-area   ">
+                <div className="hero-text-area" ref={homeSeccion}>
                   <div className="row">
                     <div className="col-12   ">
                       <div className="hero-social-icons mb-3 ">
@@ -312,23 +357,13 @@ export default function Index() {
                     </div>
                     <div className="col-12   ">
                       <div className="cta-links-area ">
-                        <a
+                        <button
                           className=" btn-outline cta-link cta-link-primary "
-                          href="#0"
+                     
                         >
-                          start now
-                        </a>
-                        <div className="play-btn-row-dir ">
-                          <a
-                            className="video-link"
-                            href="https://www.youtube.com/watch?v=QI4_dGvZ5yE&ab_channel=JUtah"
-                            role="button"
-                            title="play"
-                            data-fancybox="data-fancybox"
-                          >
-
-                          </a>
-                        </div>
+                          Quienes Somos
+                        </button>
+                        
                       </div>
                     </div>
                   </div>
@@ -363,7 +398,7 @@ export default function Index() {
         </section>
         {/* End  Page hero*/}
         {/* Start  services Section*/}
-        <section className="services services-boxed mega-section  " id="services">
+        <section className="services services-boxed mega-section " ref={servicesSeccion} id="services">
           <div className="container">
             <div className="sec-heading  ">
               <div className="content-area">
@@ -386,7 +421,7 @@ export default function Index() {
                     animationDelay: "0.4s",
                     animationName: "fadeInUp"
                   }}
-             
+
                 >
                   <span className="hollow-text">Nuestros </span> Servicios:
                 </h2>
@@ -398,7 +433,7 @@ export default function Index() {
                     animationDelay: "0.6s",
                     animationName: "fadeInUp"
                   }}
-                 
+
                 >
                   te presentamos un abánico de servicios
                   tecnológicos que te permitan encontrar en un mismo lugar la solucion a tu necesidad .
@@ -406,7 +441,7 @@ export default function Index() {
               </div>
               <div
                 className="cta-area   wow fadeInUp"
-               
+
                 data-wow-delay=".8s"
                 style={{
                   visibility: "visible",
@@ -414,7 +449,7 @@ export default function Index() {
                   animationName: "fadeInUp"
                 }}
               >
-                
+
               </div>
             </div>
             <div className="row gx-4 gy-4 services-row ">
@@ -424,7 +459,7 @@ export default function Index() {
                   className="box service-box  wow fadeInUp reveal-start"
                   data-wow-offset={0}
                   data-wow-delay=".1s"
-                 
+
                   style={{
                     visibility: "visible",
                     animationDelay: "0.1s",
@@ -451,7 +486,7 @@ export default function Index() {
                   className="box service-box wow fadeInUp reveal-start"
                   data-wow-offset={0}
                   data-wow-delay=".2s"
-                
+
                   style={{
                     visibility: "visible",
                     animationDelay: "0.2s",
@@ -479,7 +514,7 @@ export default function Index() {
                   className="box service-box  wow fadeInUp reveal-start"
                   data-wow-offset={0}
                   data-wow-delay=".3s"
-                  
+
                   style={{
                     visibility: "visible",
                     animationDelay: "0.3s",
@@ -507,7 +542,7 @@ export default function Index() {
                 <div
                   className="box service-box  wow fadeInUp reveal-start"
                   data-wow-offset={0}
-                  
+
                   data-wow-delay=".4s"
                   style={{
                     visibility: "visible",
@@ -535,7 +570,7 @@ export default function Index() {
                   className="box service-box  wow fadeInUp reveal-start"
                   data-wow-offset={0}
                   data-wow-delay=".5s"
-                 
+
                   style={{
                     visibility: "visible",
                     animationDelay: "0.5s",
@@ -561,7 +596,7 @@ export default function Index() {
                 {/*Start 6th service box*/}
                 <div
                   className="box service-box  wow fadeInUp  reveal-start"
-               
+
                   data-wow-offset={0}
                   data-wow-delay=".6s"
                   style={{
@@ -596,6 +631,7 @@ export default function Index() {
         <section
           className="portfolio portfolio-blocks mega-section   "
           id="portfolio"
+          ref={portafolioSeccion}
         >
           <div className="container">
             <div className="sec-heading  ">
@@ -613,7 +649,7 @@ export default function Index() {
                 </span>
                 <h2
                   className="title    wow fadeInUp"
-               
+
                   data-wow-delay=".4s"
                   style={{
                     visibility: "visible",
@@ -626,7 +662,7 @@ export default function Index() {
               </div>
               <div
                 className="cta-area   wow fadeInUp"
-              
+
                 data-wow-delay=".8s"
                 style={{
                   visibility: "visible",
@@ -634,7 +670,7 @@ export default function Index() {
                   animationName: "fadeInUp"
                 }}
               >
-               
+
               </div>
             </div>
             <div className="portfolio-wrapper  ">
@@ -658,7 +694,7 @@ export default function Index() {
                   Web
                 </li>
                 <li className="portfolio-btn        " data-filter=".data">
-                Analytics
+                  Analytics
                 </li>
                 <li className="portfolio-btn        " data-filter=".hosting">
                   Alojamiento
@@ -688,7 +724,7 @@ export default function Index() {
                           className="portfolio-img   img-fluid "
                           loading="lazy"
                           src={require("assets/img/1.jpg")}
-                          alt="portfolio item photo"
+                          alt="portafolio-one"
                         />
                       </a>
                       <div className="item-info ">
@@ -710,7 +746,7 @@ export default function Index() {
                           className="portfolio-img   img-fluid "
                           loading="lazy"
                           src={require("assets/img/2.jpg")}
-                          alt="portfolio item photo"
+                          alt="portfolio-two"
                         />
                       </a>
                       <div className="item-info ">
@@ -732,7 +768,7 @@ export default function Index() {
                           className="portfolio-img   img-fluid "
                           loading="lazy"
                           src={require("assets/img/3.jpg")}
-                          alt="portfolio item photo"
+                          alt="portfolio-tree"
                         />
                       </a>
                       <div className="item-info ">
@@ -754,7 +790,7 @@ export default function Index() {
                           className="portfolio-img   img-fluid "
                           loading="lazy"
                           src={require("assets/img/4.jpg")}
-                          alt="portfolio item photo"
+                          alt="portfolio-four"
                         />
                       </a>
                       <div className="item-info ">
@@ -776,7 +812,7 @@ export default function Index() {
                           className="portfolio-img   img-fluid "
                           loading="lazy"
                           src={require("assets/img/5.jpg")}
-                          alt="portfolio item photo"
+                          alt="portfolio-five"
                         />
                       </a>
                       <div className="item-info ">
@@ -798,7 +834,7 @@ export default function Index() {
                           className="portfolio-img   img-fluid "
                           loading="lazy"
                           src={require("assets/img/6.jpg")}
-                          alt="portfolio item photo"
+                          alt="portfolio-six"
                         />
                       </a>
                       <div className="item-info ">
@@ -817,6 +853,7 @@ export default function Index() {
         <section
           className="our-clients  mega-section   wow fadeInUp"
           id="our-clients"
+          ref={colaboracionSeccion}
           data-wow-delay="0.2s"
           style={{
             visibility: "visible",
@@ -843,75 +880,75 @@ export default function Index() {
             <div className=" clients-logos d-flex align-items-center justify-content-around flex-wrap">
               {/*Swiper*/}
               <Swiper
-                spaceBetween={50}
-                slidesPerView={5}
+                spaceBetween={swiperValue>3?50:30}
+                slidesPerView={swiperValue}
                 onSlideChange={() => console.log('slide change')}
                 onSwiper={(swiper) => console.log(swiper)}
                 style={{ cursor: "grab" }}
               >
-                
+
                 <SwiperSlide>
-                <div className="client-logo  ">
-                      <a href="#0">
-                        <img
-                          className="img-fluid logo "
-                          loading="lazy"
-                          src={require("assets/img/logo_tock_lock.png")}
-                          alt=" "
-                        />
-                      </a>
-                    </div>
+                  <div className="client-logo  ">
+                    <a href="#0">
+                      <img
+                        className="img-fluid logo "
+                        loading="lazy"
+                        src={require("assets/img/logo_tock_lock.png")}
+                        alt=" "
+                      />
+                    </a>
+                  </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                <div className="client-logo  ">
-                      <a href="#0">
-                        <img
-                          className="img-fluid logo "
-                          loading="lazy"
-                          src={require("assets/img/tuya_asmart.png")}
-                          alt=" "
-                        />
-                      </a>
-                    </div>
+                  <div className="client-logo  ">
+                    <a href="#0">
+                      <img
+                        className="img-fluid logo "
+                        loading="lazy"
+                        src={require("assets/img/tuya_asmart.png")}
+                        alt=" "
+                      />
+                    </a>
+                  </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                <div className="client-logo  ">
-                      <a href="#0">
-                        <img
-                          className="img-fluid logo "
-                          loading="lazy"
-                          src={require("assets/img/logo_anfikey_.png")}
-                          alt=" "
-                        />
-                      </a>
-                    </div>
+                  <div className="client-logo  ">
+                    <a href="#0">
+                      <img
+                        className="img-fluid logo "
+                        loading="lazy"
+                        src={require("assets/img/logo_anfikey_.png")}
+                        alt=" "
+                      />
+                    </a>
+                  </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                <div className="client-logo  ">
-                      <a href="#0">
-                        <img
-                          className="img-fluid logo "
-                          loading="lazy"
-                          src={require("assets/img/logo_anfikey_.png")}
-                          alt=" "
-                        />
-                      </a>
-                    </div>
+                  <div className="client-logo  ">
+                    <a href="#0">
+                      <img
+                        className="img-fluid logo "
+                        loading="lazy"
+                        src={require("assets/img/logo_anfikey_.png")}
+                        alt=" "
+                      />
+                    </a>
+                  </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                <div className="client-logo  ">
-                      <a href="#0">
-                        <img
-                          className="img-fluid logo "
-                          loading="lazy"
-                          src={require("assets/img/logo_anfikey_.png")}
-                          alt=" "
-                        />
-                      </a>
-                    </div>
+                  <div className="client-logo  ">
+                    <a href="#0">
+                      <img
+                        className="img-fluid logo "
+                        loading="lazy"
+                        src={require("assets/img/logo_anfikey_.png")}
+                        alt=" "
+                      />
+                    </a>
+                  </div>
                 </SwiperSlide>
-                
-                
+
+
               </Swiper>
 
             </div>
@@ -921,7 +958,7 @@ export default function Index() {
 
 
         {/* Start  blog Section*/}
-        <section className="contact-us-form-section  mega-section  " data-aos="fade-up">
+        <section className="contact-us-form-section  mega-section  " ref={contactoSeccion} data-aos="fade-up">
 
           <div className="row">
             <div className="container">
@@ -1052,13 +1089,9 @@ export default function Index() {
           <div className="container">
             <div className="row footer-cols">
               <div className="col-12 col-md-8 col-lg-4  footer-col ">
-                <img
-                  className="img-fluid footer-logo"
-                  loading="lazy"
-                  src={require("assets/img/logo-colored.png")}
-
-                  alt="logo"
-                />
+                 <h1 className="name-icon">
+                 Patineta<span>Studio</span>
+                </h1>
                 <div className="footer-col-content-wrapper">
                   <p className="footer-text-about-us ">
                     te invitamos a suscribirte para que tengas información actualizada sobre nuestros productos y servicios.
@@ -1074,7 +1107,7 @@ export default function Index() {
                       <div className="field-group ">
                         <label className="email-label" htmlFor="email-input">
                           {" "}
-                         
+
                         </label>
                         <input
                           className="email-input "
@@ -1102,10 +1135,10 @@ export default function Index() {
                 </div>
               </div>
               <div className="col-6 col-lg-2  footer-col ">
-               
+
               </div>
               <div className="col-6 col-lg-2 footer-col ">
-                
+
               </div>
               <div className="col-12     col-lg-4 footer-col ">
                 <h2 className=" footer-col-title    ">Información de Contacto</h2>
@@ -1183,7 +1216,7 @@ export default function Index() {
             <div className="container">
               <div className="row">
                 <div className="col-12 col-md-6 d-flex justify-content-start">
-                 
+
                 </div>
                 <div className="col-12 col-md-6 d-flex justify-content-end">
                   <div className="terms-links">
@@ -1205,7 +1238,7 @@ export default function Index() {
         {/* Start loading-screen Component*/}
         {/* End loading-screen Component*/}
         {/* Start back-to-top Button*/}
-        <div className={`back-to-top ${scroll ? "show" : ""}`} id="back-to-top">
+        <div className={`back-to-top ${scroll ? "show" : ""}`} id="back-to-top" onClick={goToTop}>
           <i className="bi bi-arrow-up icon " />
         </div>
         {/* End back-to-top Button*/}
