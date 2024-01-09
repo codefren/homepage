@@ -46,14 +46,14 @@ export default function Index() {
   const handleResize = () => {
     setWidth(window.innerWidth);
     setHeight(window.innerHeight);
-    if(window.innerWidth<=991){
+    if (window.innerWidth <= 991) {
       setSswiperValue(3)
-    }else{
+    } else {
       setSswiperValue(5)
     }
   };
 
-  const [swiperValue,setSswiperValue]=useState(5);
+  const [swiperValue, setSswiperValue] = useState(5);
   const homeSeccion = useRef(null);
   const servicesSeccion = useRef(null);
   const portafolioSeccion = useRef(null);
@@ -148,7 +148,7 @@ export default function Index() {
             <nav className="menu-navbar">
               <div className="header-logo">
                 <h1 className="name-icon">
-                 Patineta<span>Studio</span>
+                  Patineta<span>Studio</span>
                 </h1>
                 {/*<a className="logo-link" href="/">
                   <img
@@ -344,11 +344,17 @@ export default function Index() {
                       </div>
                     </div>
                     <div className="col-12       ">
-                      <div className="pre-title ">Soluciones IOT </div>
+                      {/*<div className="pre-title ">Soluciones IOT </div>*/}
                       <h1 className="hero-title  ">
-                        Facilitamos los mejores servicios & Soluciones IOT
+                        <span class="featured-text">PatinetaStudio<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 150" preserveAspectRatio="none"><path d="M7.7,145.6C109,125,299.9,116.2,401,121.3c42.1,2.2,87.6,11.8,87.3,25.7"></path></svg></span>
+                      </h1>
+                      <h1 className="hero-title  ">
+
+                        <span>Facilitamos los mejores servicios & Soluciones IOT {" "}</span>
+
 
                       </h1>
+
                     </div>
                     <div className="col-10       ">
                       <p className="hero-subtitle ">
@@ -359,11 +365,11 @@ export default function Index() {
                       <div className="cta-links-area ">
                         <button
                           className=" btn-outline cta-link cta-link-primary "
-                     
+
                         >
                           Quienes Somos
                         </button>
-                        
+
                       </div>
                     </div>
                   </div>
@@ -880,7 +886,7 @@ export default function Index() {
             <div className=" clients-logos d-flex align-items-center justify-content-around flex-wrap">
               {/*Swiper*/}
               <Swiper
-                spaceBetween={swiperValue>3?50:30}
+                spaceBetween={swiperValue > 3 ? 50 : 30}
                 slidesPerView={swiperValue}
                 onSlideChange={() => console.log('slide change')}
                 onSwiper={(swiper) => console.log(swiper)}
@@ -1089,8 +1095,8 @@ export default function Index() {
           <div className="container">
             <div className="row footer-cols">
               <div className="col-12 col-md-8 col-lg-4  footer-col ">
-                 <h1 className="name-icon">
-                 Patineta<span>Studio</span>
+                <h1 className="name-icon">
+                  Patineta<span>Studio</span>
                 </h1>
                 <div className="footer-col-content-wrapper">
                   <p className="footer-text-about-us ">
